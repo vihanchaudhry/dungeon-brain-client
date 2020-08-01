@@ -1,0 +1,54 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onSubmit(form)" #form="ngForm" *ngIf="!isLoading">
+    <mat-form-field *ngIf="state === 'register'" class="display-name">
+      <input
+        matInput
+        ngModel
+        #displayName="ngModel"
+        type="text"
+        name="displayName"
+        id="display-name"
+        placeholder="Display Name"
+        required
+      />
+      <mat-error>You must enter a valid display name.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        ngModel
+        #email="ngModel"
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email"
+        required
+        email
+      />
+      <mat-error>You must enter a valid email address.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        ngModel
+        #password="ngModel"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+        required
+      />
+      <mat-error>You must enter a valid password.</mat-error>
+    </mat-form-field>
+
+    <button *ngIf="!isLoading && state === 'login'" mat-raised-button color="primary" type="submit">
+      Login
+    </button>
+    <button *ngIf="!isLoading && state === 'register'" mat-raised-button color="primary" type="submit">
+      Register
+    </button>
+  </form>
+</mat-card>

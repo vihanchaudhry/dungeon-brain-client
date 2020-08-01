@@ -1,0 +1,16 @@
+<nav>
+  <mat-toolbar class="mat-elevation-z6" color="primary">
+    <span><a routerLink="/" mat-button>Dungeon Brain</a></span>
+
+    <span class="example-spacer"></span>
+
+    <div *ngIf="!isAuthenticated">
+      <a routerLink="/login" mat-button>Login</a>
+      <a routerLink="/register" mat-button>Register</a>
+    </div>
+
+    <div *ngIf="isAuthenticated">
+      <button (click)="onLogout()" mat-button>Logout</button>
+    </div>
+  </mat-toolbar>
+</nav>

@@ -53,6 +53,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -67,9 +68,9 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "extractCss": true,
-              "namedChunks": false,
+              "namedChunks": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -117,6 +118,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -148,6 +150,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "dungeon-brain"
+    }
+  },
+  "defaultProject": "dungeon-brain",
+  "cli": {
+    "analytics": "03f26ae3-cec6-4d58-a39d-e3d6944968f4"
+  }
 }
