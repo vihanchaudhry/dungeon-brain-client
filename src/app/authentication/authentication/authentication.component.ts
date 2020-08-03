@@ -21,12 +21,12 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.route.url.subscribe((url) => {
+    this.route.url.subscribe(url => {
       this.state = url.toString();
     });
     this.authenticationListener = this.authenticationService
       .getStatusListener()
-      .subscribe((isAuthenticated) => {
+      .subscribe(isAuthenticated => {
         if (!isAuthenticated) {
           this.isLoading = false;
         }

@@ -33,10 +33,10 @@ export class AuthenticationService {
     this.http
       .post<{ success: boolean }>(`${USERS_URL}/register`, authenticationData)
       .subscribe(
-        (response) => {
+        response => {
           this.router.navigateByUrl('/login');
         },
-        (err) => {
+        err => {
           this.statusObserver.next(false);
         }
       );
@@ -52,7 +52,7 @@ export class AuthenticationService {
         displayName: string;
       }>(`${USERS_URL}/login`, authenticationData)
       .subscribe(
-        (response) => {
+        response => {
           this.token = response.token;
           if (this.token) {
             this.setTimer(response.expiresIn);
@@ -73,7 +73,7 @@ export class AuthenticationService {
             this.router.navigateByUrl('/');
           }
         },
-        (err) => {
+        err => {
           this.statusObserver.next(false);
         }
       );
@@ -146,7 +146,7 @@ export class AuthenticationService {
       token: token as string,
       expirationDate: new Date(expirationDate as string),
       userId: userId as string,
-      displayName: displayName as string
+      displayName: displayName as string,
     };
   }
 

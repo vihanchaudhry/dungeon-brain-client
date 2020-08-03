@@ -1,1 +1,31 @@
-<p>characters works!</p>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<mat-accordion multi *ngIf="!isLoading && characters.length > 0">
+  <mat-expansion-panel *ngFor="let character of characters">
+    <mat-expansion-panel-header>{{ character.name }}</mat-expansion-panel-header>
+
+    <div class="character-image">
+      <img [src]="character.imageUrl" [alt]="character.name" />
+    </div>
+
+    <p class="character-content">{{ character.description }}</p>
+
+    <mat-action-row *ngIf="isAuthenticated && userId === character.author">
+      <a [routerLink]="['/characters/edit', character._id]" mat-button>EDIT</a>
+      <button mat-button (click)="onDelete(character._id)" color="warn">
+        DELETE
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator
+  *ngIf="characters.length > 0"
+  (page)="onPageChange($event)"
+  [length]="count"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+></mat-paginator>
+
+<p *ngIf="!isLoading && characters.length === 0" class="info-text">
+  There are no characters to display.
+</p>

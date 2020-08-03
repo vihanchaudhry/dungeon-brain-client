@@ -1,0 +1,45 @@
+mat-form-field,
+textarea {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field {
+  margin: 0.75rem 0;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+button {
+  margin: 0.75rem 0.25rem;
+}
+
+.bottom-button {
+  margin-top: 0.75rem;
+  button {
+    margin-bottom: 0;
+  }
+}
+
+.upload-area {
+  margin: 0.75rem 0;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.image-preview {
+  width: 8rem;
+  margin: 0.75rem 0.25rem;
+
+  img {
+    width: 100%;
+  }
+}
+
+.add-button {
+  display: block;
+}

@@ -1,1 +1,164 @@
-<p>create works!</p>
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <mat-vertical-stepper #stepper>
+    <mat-step [stepControl]="firstStep">
+      <form [formGroup]="firstStep">
+        <ng-template matStepLabel>Essential details</ng-template>
+
+        <mat-form-field>
+          <mat-label>Character Name</mat-label>
+          <input
+            matInput
+            formControlName="name"
+            name="name"
+            id="name"
+            required
+          />
+          <mat-error>You must enter a valid character name.</mat-error>
+        </mat-form-field>
+
+        <div class="upload-area">
+          <button (click)="fileInput.click()" mat-stroked-button type="button">
+            Upload an image
+          </button>
+          <input type="file" #fileInput (change)="onImageSelect($event)" />
+        </div>
+
+        <div
+          *ngIf="imagePreview && firstStep.get('image')"
+          class="image-preview"
+        >
+          <img [src]="imagePreview" [alt]="firstStep.value.title" />
+        </div>
+        <div
+          *ngIf="
+            !imagePreview && this.character.imageUrl && firstStep.get('image')
+          "
+          class="image-preview"
+        >
+          <img [src]="this.character.imageUrl" [alt]="firstStep.value.title" />
+        </div>
+
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            name="description"
+            id="description"
+            rows="4"
+            required
+          ></textarea>
+          <mat-error>Please tell us a little about your character.</mat-error>
+        </mat-form-field>
+
+        <mat-checkbox
+          formControlName="isPrivate"
+          name="isPrivate"
+          id="isPrivate"
+          >Make private</mat-checkbox
+        >
+
+        <div class="bottom-button">
+          <button
+            (click)="clearForms()"
+            mat-button
+            matStepperPrevious
+          >
+            Reset
+          </button>
+          <button mat-raised-button color="accent" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondStep">
+      <form [formGroup]="secondStep">
+        <ng-template matStepLabel>Recommended details</ng-template>
+
+        <mat-form-field>
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender" name="gender" id="gender">
+            <mat-option *ngFor="let gender of genders" [value]="gender.value">
+              {{ gender.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Race</mat-label>
+          <mat-select formControlName="race" name="race" id="race">
+            <mat-option *ngFor="let race of races" [value]="race.value">
+              {{ race.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Class</mat-label>
+          <mat-select formControlName="class" name="class" id="class">
+            <mat-option *ngFor="let class of classes" [value]="class.value">
+              {{ class.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="bottom-button">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-raised-button color="accent" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form [formGroup]="thirdStep">
+        <ng-template matStepLabel>Finalize</ng-template>
+
+        <mat-form-field>
+          <mat-label>Alignment</mat-label>
+          <mat-select
+            formControlName="alignment"
+            name="alignment"
+            id="alignment"
+          >
+            <mat-option
+              *ngFor="let alignment of alignments"
+              [value]="alignment.value"
+            >
+              {{ alignment.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Background</mat-label>
+          <mat-select
+            formControlName="background"
+            name="background"
+            id="background"
+          >
+            <mat-option
+              *ngFor="let background of backgrounds"
+              [value]="background.value"
+            >
+              {{ background.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Faith</mat-label>
+          <input matInput formControlName="faith" name="faith" id="faith" />
+          <mat-error>You must enter a valid faith.</mat-error>
+        </mat-form-field>
+
+        <p>Make sure all the information is correct.</p>
+
+        <div class="bottom-button">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" (click)="onSave()">
+            Create
+          </button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-vertical-stepper>
+</mat-card>

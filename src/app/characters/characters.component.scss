@@ -1,0 +1,30 @@
+mat-spinner {
+  margin: auto;
+}
+
+mat-paginator {
+  margin-top: 0.75rem;
+}
+
+:host {
+  display: block;
+  margin-top: 1.5rem;
+}
+
+.info-text {
+  text-align: center;
+}
+
+.character-image {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.character-image img {
+  width: 100%;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.14);
+}
+
+.character-content {
+  white-space: pre-line;
+}

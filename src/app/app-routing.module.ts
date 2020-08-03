@@ -7,13 +7,13 @@ const routes: Routes = [
   {
     path: 'characters',
     loadChildren: () =>
-      import('./characters/characters.module').then((m) => m.CharactersModule),
+      import('./characters/characters.module').then(m => m.CharactersModule),
   },
   {
     path: '',
     loadChildren: () =>
       import('./authentication/authentication.module').then(
-        (m) => m.AuthenticationModule
+        m => m.AuthenticationModule
       ),
   },
 ];

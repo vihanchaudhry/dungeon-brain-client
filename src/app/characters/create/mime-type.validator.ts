@@ -4,7 +4,7 @@ import { Observable, Observer, of } from 'rxjs';
 export const mimeTypeValidator = (
   control: AbstractControl
 ): Observable<ValidationErrors | null> => {
-  if (typeof control.value !== 'object') {
+  if (typeof control.value !== 'object' || !control.value) {
     return of(null);
   }
 
