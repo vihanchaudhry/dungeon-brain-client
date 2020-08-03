@@ -1,14 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MatStepper } from '@angular/material/stepper';
 
 import { Character } from '../character';
 import { CharactersService } from '../characters.service';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { mimeTypeValidator } from './mime-type.validator';
-import { MatStepper } from '@angular/material/stepper';
-
 interface Select {
   value: string;
   viewValue: string;
@@ -20,7 +19,7 @@ interface Select {
   styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit, OnDestroy {
-  private state: 'create' | 'edit' = 'create';
+  public state: 'Create' | 'Update' = 'Create';
   public isLoading = false;
 
   private charId = '';
@@ -99,7 +98,8 @@ export class CreateComponent implements OnInit, OnDestroy {
     private charactersService: CharactersService,
     public route: ActivatedRoute,
     private authenticationService: AuthenticationService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -108,7 +108,7 @@ export class CreateComponent implements OnInit, OnDestroy {
       .subscribe(isAuthenticated => (this.isLoading = false));
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('charId')) {
-        this.state = 'edit';
+        this.state = 'Update';
         this.charId = paramMap.get('charId') as string;
         this.isLoading = true;
         this.charactersService
@@ -134,7 +134,7 @@ export class CreateComponent implements OnInit, OnDestroy {
             });
           });
       } else {
-        this.state = 'create';
+        this.state = 'Create';
         this.charId = '';
       }
     });
@@ -175,37 +175,47 @@ export class CreateComponent implements OnInit, OnDestroy {
 
     this.isLoading = true;
 
-    if (this.state === 'create') {
-      this.charactersService.createCharacter(
-        this.firstStep.value.name,
-        this.firstStep.value.description,
-        this.firstStep.value.image,
-        this.firstStep.value.isPrivate,
-        this.secondStep.value.gender,
-        this.secondStep.value.race,
-        this.secondStep.value.class,
-        this.thirdStep.value.alignment,
-        this.thirdStep.value.background,
-        this.thirdStep.value.faith
-      );
+    if (this.state === 'Create') {
+      this.charactersService
+        .createCharacter(
+          this.firstStep.value.name,
+          this.firstStep.value.description,
+          this.firstStep.value.image,
+          this.firstStep.value.isPrivate,
+          this.secondStep.value.gender,
+          this.secondStep.value.race,
+          this.secondStep.value.class,
+          this.thirdStep.value.alignment,
+          this.thirdStep.value.background,
+          this.thirdStep.value.faith
+        )
+        .subscribe(response => {
+          this.isLoading = false;
+          if (response.success) {
+            this.router.navigateByUrl('/characters');
+          }
+        });
     } else {
-      this.charactersService.updateCharacter(
-        this.character._id,
-        this.firstStep.value.name,
-        this.firstStep.value.description,
-        this.firstStep.value.image,
-        this.firstStep.value.isPrivate,
-        this.secondStep.value.gender,
-        this.secondStep.value.race,
-        this.secondStep.value.class,
-        this.thirdStep.value.alignment,
-        this.thirdStep.value.background,
-        this.thirdStep.value.faith
-      );
+      this.charactersService
+        .updateCharacter(
+          this.character._id,
+          this.firstStep.value.name,
+          this.firstStep.value.description,
+          this.firstStep.value.image,
+          this.firstStep.value.isPrivate,
+          this.secondStep.value.gender,
+          this.secondStep.value.race,
+          this.secondStep.value.class,
+          this.thirdStep.value.alignment,
+          this.thirdStep.value.background,
+          this.thirdStep.value.faith
+        )
+        .subscribe(response => {
+          this.isLoading = false;
+          if (response.success) {
+            this.router.navigateByUrl('/characters');
+          }
+        });
     }
-
-    this.firstStep.reset();
-    this.secondStep.reset();
-    this.thirdStep.reset();
   }
 }

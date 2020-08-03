@@ -58,7 +58,7 @@ export class CharactersService {
     alignment: string,
     background: string,
     faith: string
-  ): void {
+  ): Observable<{ success: boolean; message: string }> {
     const formData = new FormData();
 
     formData.append('name', name);
@@ -76,9 +76,10 @@ export class CharactersService {
     formData.append('background', background);
     formData.append('faith', faith);
 
-    this.http.post<Character>(CHARACTERS_URL, formData).subscribe(response => {
-      this.router.navigateByUrl('/characters');
-    });
+    return this.http.post<{ success: boolean; message: string }>(
+      CHARACTERS_URL,
+      formData
+    );
   }
 
   public updateCharacter(
@@ -94,7 +95,7 @@ export class CharactersService {
     alignment: string,
     background: string,
     faith: string
-  ): void {
+  ): Observable<{ success: boolean; message: string }> {
     let character: Character | FormData;
     if (typeof image === 'object') {
       character = new FormData();
@@ -127,11 +128,7 @@ export class CharactersService {
       };
     }
 
-    this.http
-      .put<Character>(`${CHARACTERS_URL}/${charId}`, character)
-      .subscribe(response => {
-        this.router.navigateByUrl('/');
-      });
+    return this.http.put<{ success: boolean; message: string }>(`${CHARACTERS_URL}/${charId}`, character);
   }
 
   public deleteCharacter(charId: string): Observable<Character> {
