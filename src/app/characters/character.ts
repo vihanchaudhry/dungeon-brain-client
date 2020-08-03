@@ -2,15 +2,15 @@ export interface Character {
   _id: string;
   name: string;
   description: string;
-  isPrivate?: boolean;
+  imageUrl: string;
+  isPrivate: boolean;
+  gender: string;
+  race: string;
+  class: string;
+  alignment: string;
+  background: string;
+  faith: string;
   createdAt?: Date;
   updatedAt?: Date;
   author?: string;
-  imageUrl?: string;
-  race?: string;
-  class?: string;
-  gender?: string;
-  alignment?: string;
-  faith?: string;
-  background?: string;
 }
