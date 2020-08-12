@@ -44,6 +44,21 @@
       <mat-error>You must enter a valid password.</mat-error>
     </mat-form-field>
 
+    <mat-form-field *ngIf="state === 'register'">
+      <input
+        matInput
+        ngModel
+        #confirmPassword="ngModel"
+        type="password"
+        name="confirmPassword"
+        id="confirm-password"
+        placeholder="Confirm password"
+        required
+        [pattern]="'^' + password.value + '$'"
+      />
+      <mat-error>The passwords must match.</mat-error>
+    </mat-form-field>
+
     <button *ngIf="!isLoading && state === 'login'" mat-raised-button color="primary" type="submit">
       Login
     </button>
