@@ -1,23 +1,34 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 
-<mat-accordion multi *ngIf="!isLoading && characters.length > 0">
-  <mat-expansion-panel *ngFor="let character of characters">
-    <mat-expansion-panel-header>{{ character.name }}</mat-expansion-panel-header>
+<div *ngIf="!isLoading && characters.length > 0" class="cards">
+  <div *ngFor="let character of characters">
+    <mat-card>
+      <div class="image-container">
+        <img
+          mat-card-image
+          [src]="character.imageUrl"
+          [alt]="character.name"
+          class="image"
+        />
+      </div>
+      <mat-card-header>
+        <mat-card-title>{{ character.name }}</mat-card-title>
+        <mat-card-subtitle>
+          {{ character.race | titlecase }}
+          {{ character.class | titlecase }}
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
 
-    <div class="character-image">
-      <img [src]="character.imageUrl" [alt]="character.name" />
-    </div>
-
-    <p class="character-content">{{ character.description }}</p>
-
-    <mat-action-row *ngIf="isAuthenticated && userId === character.author">
+    <div *ngIf="isAuthenticated && userId === character.author">
       <a [routerLink]="['/characters/edit', character._id]" mat-button>EDIT</a>
       <button mat-button (click)="onDelete(character._id)" color="warn">
         DELETE
       </button>
-    </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
+    </div>
+  </div>
+</div>
+
 <mat-paginator
   *ngIf="characters.length > 0"
   (page)="onPageChange($event)"

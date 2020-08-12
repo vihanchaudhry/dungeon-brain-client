@@ -24,8 +24,8 @@ export class CharactersComponent implements OnInit, OnDestroy {
   // Pagination
   count = 0; // total num of characters
   page = 1; // current page
-  pageSize = 6; // size of each page
-  pageSizeOptions = [3, 6, 9]; // different page size we can set
+  pageSize = 12; // size of each page
+  pageSizeOptions = [6, 12, 24]; // different page size we can set
 
   constructor(
     private charactersService: CharactersService,

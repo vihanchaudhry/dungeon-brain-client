@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MatStepper } from '@angular/material/stepper';
 
 import { Character } from '../character';
 import { CharactersService } from '../characters.service';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { mimeTypeValidator } from './mime-type.validator';
+
 interface Select {
   value: string;
   viewValue: string;
