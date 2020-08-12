@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
+import { AuthenticationGuard } from './authentication/authentication.guard';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -15,6 +16,12 @@ const routes: Routes = [
       import('./authentication/authentication.module').then(
         m => m.AuthenticationModule
       ),
+  },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./profile/profile.module').then(m => m.ProfileModule),
+    canActivate: [AuthenticationGuard],
   },
 ];
 

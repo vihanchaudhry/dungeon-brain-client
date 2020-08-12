@@ -4,13 +4,16 @@
 
     <span class="example-spacer"></span>
 
-    <div *ngIf="!isAuthenticated">
+    <div *ngIf="!isAuthenticated" class="header-right">
       <a routerLink="/login" mat-button>Login</a>
       <a routerLink="/register" mat-button>Register</a>
     </div>
 
-    <div *ngIf="isAuthenticated">
+    <div *ngIf="isAuthenticated" class="header-right">
       <button (click)="onLogout()" mat-button>Logout</button>
+      <a routerLink="/profile" class="profile"
+        ><img src="assets/profile-pic.jpg" alt="profile pic"
+      /></a>
     </div>
   </mat-toolbar>
 </nav>

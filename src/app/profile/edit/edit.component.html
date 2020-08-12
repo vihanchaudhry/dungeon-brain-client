@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+  <form [formGroup]="editForm" *ngIf="!isLoading">
+    <mat-form-field class="display-name">
+      <mat-label>Display Name</mat-label>
+      <input
+        matInput
+        formControlName="displayName"
+        name="displayName"
+        id="display-name"
+        placeholder="Display Name"
+      />
+      <mat-error>You must enter a valid display name.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="password"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+      />
+      <mat-error>You must enter a valid password.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="confirmPassword"
+        type="password"
+        name="confirmPassword"
+        id="confirm-password"
+        placeholder="Confirm password"
+      />
+      <mat-error>The passwords must match.</mat-error>
+    </mat-form-field>
+
+    <button
+      *ngIf="!isLoading"
+      mat-raised-button
+      color="primary"
+      (click)="onSubmit()"
+    >
+      Submit changes
+    </button>
+  </form>
+</mat-card>
