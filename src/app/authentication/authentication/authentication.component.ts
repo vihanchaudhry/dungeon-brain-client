@@ -27,9 +27,7 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     this.authenticationListener = this.authenticationService
       .getStatusListener()
       .subscribe(isAuthenticated => {
-        if (!isAuthenticated) {
-          this.isLoading = false;
-        }
+        this.isLoading = false;
       });
   }
 
@@ -41,7 +39,9 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     if (form.invalid) {
       return;
     }
+
     this.isLoading = true;
+
     if (this.state === 'login') {
       this.authenticationService.login(form.value.email, form.value.password);
     } else {

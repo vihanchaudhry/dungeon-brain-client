@@ -90,6 +90,16 @@ export class AuthenticationService {
     this.router.navigateByUrl('/');
   }
 
+  public changePassword(
+    oldPassword: string,
+    newPassword: string
+  ): Observable<{ success: boolean; message: string }> {
+    return this.http.post<{ success: boolean; message: string }>(
+      `${USERS_URL}/change-password`,
+      { oldPassword, newPassword }
+    );
+  }
+
   public getToken(): string {
     return this.token;
   }

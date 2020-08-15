@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
@@ -23,6 +24,7 @@ import { EditComponent } from './edit/edit.component';
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
 })
 export class ProfileModule {}
