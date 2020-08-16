@@ -1,4 +1,19 @@
-<img src="assets/profile-pic.jpg" alt="profile-pic" />
-<h3>Vihan</h3>
-<p>My characters</p>
-<a routerLink="/profile/edit" mat-raised-button color="primary">Change password</a>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ displayName }}</mat-card-title>
+  </mat-card-header>
+
+  <img src="assets/profile-pic.jpg" alt="profile-pic" />
+
+  <a routerLink="/profile/edit" mat-raised-button color="primary">
+    Change password
+  </a>
+
+  <div class="info">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+      interdum erat vel mi commodo, ut mollis enim lobortis. Aliquam vehicula
+      ultrices ante nec semper.
+    </p>
+  </div>
+</mat-card>

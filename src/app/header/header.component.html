@@ -1,19 +1,39 @@
 <nav>
   <mat-toolbar class="mat-elevation-z6" color="primary">
-    <span><a routerLink="/" mat-button>Dungeon Brain</a></span>
+    <mat-toolbar-row>
+      <span class="title"><a routerLink="/" mat-button>DB</a></span>
 
-    <span class="example-spacer"></span>
+      <span class="example-spacer"></span>
 
-    <div *ngIf="!isAuthenticated" class="header-right">
-      <a routerLink="/login" mat-button>Login</a>
-      <a routerLink="/register" mat-button>Register</a>
-    </div>
+      <div class="header-right search-area">
+        <form #form="ngForm" (submit)="onSearch(form)">
+          <input
+            type="search"
+            name="search"
+            id="search"
+            aria-label="Search"
+            placeholder="Search"
+            ngModel
+          />
+        </form>
+      </div>
 
-    <div *ngIf="isAuthenticated" class="header-right">
-      <button (click)="onLogout()" mat-button>Logout</button>
-      <a routerLink="/profile" class="profile"
-        ><img src="assets/profile-pic.jpg" alt="profile pic"
-      /></a>
-    </div>
+      <div *ngIf="isAuthenticated" class="header-right">
+        <a routerLink="/profile" class="profile">
+          <img src="assets/profile-pic.jpg" alt="profile pic" />
+        </a>
+      </div>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row class="second-row">
+      <div *ngIf="!isAuthenticated" class="header-right">
+        <a routerLink="/login" mat-button>Login</a>
+        <a routerLink="/register" mat-button>Register</a>
+      </div>
+
+      <div *ngIf="isAuthenticated" class="header-right">
+        <button (click)="onLogout()" mat-button>Logout</button>
+      </div>
+    </mat-toolbar-row>
   </mat-toolbar>
 </nav>

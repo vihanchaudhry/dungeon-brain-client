@@ -12,7 +12,7 @@ const CHARACTERS_URL = `${environment.apiUrl}/characters`;
 })
 export class CharactersService {
   private characters: Character[] = [];
-  private count = 0; // total count of characters in the database
+  private count = 0; // total count of characters in the database or query
   private charactersObserver = new Subject<{
     characters: Character[];
     count: number;
@@ -27,10 +27,10 @@ export class CharactersService {
     return this.charactersObserver.asObservable();
   }
 
-  public getCharacters(page?: number, pageSize?: number): void {
+  public getCharacters(page?: number, pageSize?: number, query = ''): void {
     this.http
       .get<{ characters: Character[]; count: number }>(
-        `${CHARACTERS_URL}?page=${page}&pageSize=${pageSize}`
+        `${CHARACTERS_URL}?page=${page}&pageSize=${pageSize}&q=${query}`
       )
       .subscribe(response => {
         this.characters = response.characters;
@@ -128,7 +128,10 @@ export class CharactersService {
       };
     }
 
-    return this.http.put<{ success: boolean; message: string }>(`${CHARACTERS_URL}/${charId}`, character);
+    return this.http.put<{ success: boolean; message: string }>(
+      `${CHARACTERS_URL}/${charId}`,
+      character
+    );
   }
 
   public deleteCharacter(charId: string): Observable<Character> {

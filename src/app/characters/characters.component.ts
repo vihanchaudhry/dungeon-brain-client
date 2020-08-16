@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Params } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
+import { Subscription } from 'rxjs';
 import { Character } from './character';
 import { CharactersService } from './characters.service';
 import { AuthenticationService } from '../authentication/authentication.service';
@@ -27,14 +28,23 @@ export class CharactersComponent implements OnInit, OnDestroy {
   pageSize = 12; // size of each page
   pageSizeOptions = [6, 12, 24]; // different page size we can set
 
+  // Search
+  query = '';
+
   constructor(
+    private route: ActivatedRoute,
     private charactersService: CharactersService,
     private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.charactersService.getCharacters(1, this.pageSize);
+
+    this.route.queryParams.subscribe((params: Params) => {
+      this.query = params.q;
+      this.charactersService.getCharacters(1, this.pageSize, this.query);
+    });
+
     this.userId = this.authenticationService.getUserId();
     this.charactersListener = this.charactersService
       .getCharactersListener()
@@ -61,7 +71,11 @@ export class CharactersComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.charactersService.deleteCharacter(charId).subscribe(
       () => {
-        this.charactersService.getCharacters(this.page, this.pageSize);
+        this.charactersService.getCharacters(
+          this.page,
+          this.pageSize,
+          this.query
+        );
       },
       err => {
         this.isLoading = false;
@@ -73,6 +87,6 @@ export class CharactersComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.page = pageEvent.pageIndex + 1;
     this.pageSize = pageEvent.pageSize;
-    this.charactersService.getCharacters(this.page, this.pageSize);
+    this.charactersService.getCharacters(this.page, this.pageSize, this.query);
   }
 }
