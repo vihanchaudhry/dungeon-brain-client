@@ -68,9 +68,9 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": true,
+              "sourceMap": false,
               "extractCss": true,
-              "namedChunks": true,
+              "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -148,6 +148,10 @@
               "devServerTarget": "dungeon-brain:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "dungeon-brain": {
+      "hosting": {
+        "dungeon-brain": [
+          "dungeon-brain"
+        ]
+      }
+    }
+  }
+}
