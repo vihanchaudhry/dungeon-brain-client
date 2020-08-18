@@ -4,12 +4,7 @@
   <div *ngFor="let character of characters">
     <mat-card>
       <div class="image-container">
-        <img
-          mat-card-image
-          [src]="character.imageUrl"
-          [alt]="character.name"
-          class="image"
-        />
+        <img mat-card-image [src]="character.imageUrl" [alt]="character.name" class="image" />
       </div>
       <mat-card-header>
         <mat-card-title>{{ character.name }}</mat-card-title>
@@ -29,13 +24,8 @@
   </div>
 </div>
 
-<mat-paginator
-  *ngIf="characters.length > 0"
-  (page)="onPageChange($event)"
-  [length]="count"
-  [pageSize]="pageSize"
-  [pageSizeOptions]="pageSizeOptions"
-></mat-paginator>
+<mat-paginator *ngIf="characters.length > 0" (page)="onPageChange($event)" [length]="count" [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"></mat-paginator>
 
 <p *ngIf="!isLoading && characters.length === 0" class="info-text">
   There are no characters to display.

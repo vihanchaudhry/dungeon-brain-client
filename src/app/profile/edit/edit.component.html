@@ -4,57 +4,26 @@
   <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="old-password">
       <mat-label>Old password</mat-label>
-      <input
-        matInput
-        formControlName="oldPassword"
-        type="password"
-        name="oldPassword"
-        id="old-password"
-      />
-      <mat-error *ngIf="editForm.hasError('required', 'oldPassword')"
-        >Please enter your password.</mat-error
-      >
+      <input matInput formControlName="oldPassword" type="password" name="oldPassword" id="old-password" />
+      <mat-error *ngIf="editForm.hasError('required', 'oldPassword')">Please enter your password.</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>New password</mat-label>
-      <input
-        matInput
-        formControlName="newPassword"
-        type="password"
-        name="newPassword"
-        id="new-password"
-      />
-      <mat-error *ngIf="editForm.hasError('required', 'newPassword')"
-        >You must enter a valid password.</mat-error
-      >
-      <mat-error *ngIf="editForm.hasError('noChange')"
-        >The new password must be different from your old password.</mat-error
-      >
+      <input matInput formControlName="newPassword" type="password" name="newPassword" id="new-password" />
+      <mat-error *ngIf="editForm.hasError('required', 'newPassword')">You must enter a valid password.</mat-error>
+      <mat-error *ngIf="editForm.hasError('noChange')">The new password must be different from your old password.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Confirm password</mat-label>
-      <input
-        matInput
-        formControlName="confirmNewPassword"
-        [errorStateMatcher]="matcher"
-        type="password"
-        name="confirmNewPassword"
-        id="confirm-new-password"
-      />
-      <mat-error *ngIf="editForm.hasError('noMatch')"
-        >The passwords must match.</mat-error
-      >
+      <input matInput formControlName="confirmNewPassword" [errorStateMatcher]="matcher" type="password"
+        name="confirmNewPassword" id="confirm-new-password" />
+      <mat-error *ngIf="editForm.hasError('noMatch')">The passwords must match.</mat-error>
     </mat-form-field>
 
-    <button
-      *ngIf="!isLoading"
-      mat-raised-button
-      color="primary"
-      type="submit"
-      (click)="onSubmit()"
-    >
+    <button *ngIf="!isLoading" mat-raised-button color="primary" type="submit" (click)="onSubmit()">
       Submit
     </button>
   </form>

@@ -7,13 +7,7 @@
 
         <mat-form-field>
           <mat-label>Character Name</mat-label>
-          <input
-            matInput
-            formControlName="name"
-            name="name"
-            id="name"
-            required
-          />
+          <input matInput formControlName="name" name="name" id="name" required />
           <mat-error>You must enter a valid character name.</mat-error>
         </mat-form-field>
 
@@ -24,47 +18,28 @@
           <input type="file" #fileInput (change)="onImageSelect($event)" />
         </div>
 
-        <div
-          *ngIf="imagePreview && firstStep.get('image')"
-          class="image-preview"
-        >
+        <div *ngIf="imagePreview && firstStep.get('image')" class="image-preview">
           <img [src]="imagePreview" [alt]="firstStep.value.title" />
         </div>
-        <div
-          *ngIf="
+        <div *ngIf="
             !imagePreview && this.character.imageUrl && firstStep.get('image')
-          "
-          class="image-preview"
-        >
+          " class="image-preview">
           <img [src]="this.character.imageUrl" [alt]="firstStep.value.title" />
         </div>
 
         <mat-form-field>
           <mat-label>Description</mat-label>
-          <textarea
-            matInput
-            formControlName="description"
-            name="description"
-            id="description"
-            rows="4"
-            required
-          ></textarea>
+          <textarea matInput formControlName="description" name="description" id="description" rows="4"
+            required></textarea>
           <mat-error>Please tell us a little about your character.</mat-error>
         </mat-form-field>
 
-        <mat-checkbox
-          formControlName="isPrivate"
-          name="isPrivate"
-          id="isPrivate"
-          >Make private</mat-checkbox
-        >
+        <mat-checkbox formControlName="isPrivate" name="isPrivate" id="isPrivate">
+          Make private
+        </mat-checkbox>
 
         <div class="bottom-button">
-          <button
-            (click)="clearForms()"
-            mat-button
-            matStepperPrevious
-          >
+          <button (click)="clearForms()" mat-button matStepperPrevious>
             Reset
           </button>
           <button mat-raised-button color="accent" matStepperNext>Next</button>
@@ -114,15 +89,8 @@
 
         <mat-form-field>
           <mat-label>Alignment</mat-label>
-          <mat-select
-            formControlName="alignment"
-            name="alignment"
-            id="alignment"
-          >
-            <mat-option
-              *ngFor="let alignment of alignments"
-              [value]="alignment.value"
-            >
+          <mat-select formControlName="alignment" name="alignment" id="alignment">
+            <mat-option *ngFor="let alignment of alignments" [value]="alignment.value">
               {{ alignment.viewValue }}
             </mat-option>
           </mat-select>
@@ -130,15 +98,8 @@
 
         <mat-form-field>
           <mat-label>Background</mat-label>
-          <mat-select
-            formControlName="background"
-            name="background"
-            id="background"
-          >
-            <mat-option
-              *ngFor="let background of backgrounds"
-              [value]="background.value"
-            >
+          <mat-select formControlName="background" name="background" id="background">
+            <mat-option *ngFor="let background of backgrounds" [value]="background.value">
               {{ background.viewValue }}
             </mat-option>
           </mat-select>
