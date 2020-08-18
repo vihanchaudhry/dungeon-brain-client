@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthenticationService } from '../authentication.service';
 import { Subscription } from 'rxjs';
@@ -16,8 +18,10 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   private authenticationListener = new Subscription();
 
   constructor(
-    public authenticationService: AuthenticationService,
-    public route: ActivatedRoute
+    private authenticationService: AuthenticationService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -45,11 +49,16 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     if (this.state === 'login') {
       this.authenticationService.login(form.value.email, form.value.password);
     } else {
-      this.authenticationService.register(
-        form.value.email,
-        form.value.password,
-        form.value.displayName
-      );
+      this.authenticationService
+        .register(form.value.email, form.value.password, form.value.displayName)
+        .subscribe(response => {
+          this.showMessage(response.message);
+          this.router.navigateByUrl('/login');
+        });
     }
+  }
+
+  private showMessage(message: string): void {
+    this.snackbar.open(message, 'Close', { duration: 5000 });
   }
 }

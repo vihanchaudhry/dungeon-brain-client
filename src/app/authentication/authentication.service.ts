@@ -24,22 +24,20 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  public register(email: string, password: string, displayName: string): void {
+  public register(
+    email: string,
+    password: string,
+    displayName: string
+  ): Observable<{ success: boolean; message: string }> {
     const authenticationData: AuthenticationData = {
       email,
       password,
       displayName,
     };
-    this.http
-      .post<{ success: boolean }>(`${USERS_URL}/register`, authenticationData)
-      .subscribe(
-        response => {
-          this.router.navigateByUrl('/login');
-        },
-        err => {
-          this.statusObserver.next(false);
-        }
-      );
+    return this.http.post<{ success: boolean; message: string }>(
+      `${USERS_URL}/register`,
+      authenticationData
+    );
   }
 
   public login(email: string, password: string): void {
